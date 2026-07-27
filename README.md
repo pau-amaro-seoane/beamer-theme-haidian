@@ -215,10 +215,6 @@ Creates a clean title slide with the title and author only (no date, no navigati
 
 ## Troubleshooting
 
-### Missing bullet points or square symbols
-
-If your list symbols disappear, ensure you are not loading the `enumitem` package in your main document preamble. `enumitem` conflicts with Beamer's native list rendering and overrides the custom square bullets defined in this theme. The theme has been updated to use Beamer's native environment spacing to avoid this conflict entirely.
-
 ### Movie doesn't play
 
 1. **Use Okular** (Linux) or **Adobe Acrobat** (any platform)
@@ -265,9 +261,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 **Pau Amaro Seoane**
 
-- University of Chinese Academy of Sciences, Beijing, China
-- Kavli Institute for Astronomy and Astrophysics at Peking University, Beijing, China
-- Lanzhou University, Lanzhou, China
+amaro AT riseup.net
 
 ---
 
