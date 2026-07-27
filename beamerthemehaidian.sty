@@ -19,25 +19,30 @@
 % =============================================================================
 %
 % This style file provides a consistent, dark-themed Beamer template
-% inspired by the Haidian district of Beijing, home to Peking University,
-% the Kavli Institute for Astronomy and Astrophysics, and the Beijing
-% Institute of Mathematical Sciences and Applications (BIMSA).
+% inspired by the Haidian district of Beijing. The Haidian district is 
+% home to Peking University, the Kavli Institute for Astronomy and Astrophysics, 
+% and the Beijing Institute of Mathematical Sciences and Applications (BIMSA).
 %
-% It is designed for presentations on astrophysics, gravitational-wave
-% physics, and related fields, with a focus on readability in low-light
-% environments.
+% It is specifically designed for presentations on astrophysics, gravitational-wave
+% physics, and related fields. The primary design philosophy focuses on 
+% maximizing readability and reducing eye strain in low-light environments.
 %
 % Features:
-%   - Black background with white/dimmed text for low-light environments
-%   - Custom \idea{} and \point{} commands for highlighting key concepts
-%   - A \plain{} slide for centered text with no headers
-%   - A \plotslide{} with fade-in to mitigate brightness jumps
-%   - A \plotslidecomment{} with figure at top and compact comments below
-%   - A \slidemovie{} for embedding videos with poster images
-%   - A custom \maketitle with no navigation clutter
+%   - Black background with white and dimmed text for low-light environments.
+%   - Custom \idea{} and \point{} commands for semantic highlighting of key concepts.
+%   - A \plain{} slide environment for centering text with no headers or footers.
+%   - A \plotslide{} command featuring a fade-in effect to mitigate sudden brightness jumps when displaying plots.
+%   - A \plotslidecomment{} command that positions a figure at the top of the slide with compact, bulleted comments below it.
+%   - A \slidemovie{} command for seamlessly embedding videos with static poster images.
+%   - A custom \maketitle definition that removes navigation clutter from the title slide.
 %
-% Usage:
+% Basic Usage Example:
+%   To use this theme, simply include it in your preamble:
+%   \documentclass{beamer}
 %   \usepackage{beamerthemehaidian}
+%   \begin{document}
+%   \maketitle
+%   \end{document}
 %
 % =============================================================================
 
@@ -46,58 +51,60 @@
 % SECTION 1: PACKAGE REQUIREMENTS
 % =============================================================================
 % All external packages needed for this theme are loaded here.
+% Ensure these packages are available in your LaTeX distribution.
 % =============================================================================
 
-% Color management: allows defining custom colors and color models
+% Color management: allows defining custom colors and color models.
 \RequirePackage{xcolor}
 
 % Font management: Cantarell is a clean, modern sans-serif font designed
-% for readability on screens. The [default] option makes it the main font.
+% for readability on screens. The [default] option ensures it is set as the main font for the document.
 \RequirePackage[default]{cantarell}
 
 % Font encoding: ensures proper rendering of accented characters and
-% special symbols (e.g., \ss, \"a, etc.)
+% special symbols (e.g., \ss, \"a, etc.).
 \RequirePackage[T1]{fontenc}
 
-% Graphics inclusion: provides \includegraphics for embedding figures
-% (PDF, PNG, JPG, etc.) in the presentation
+% Graphics inclusion: provides \includegraphics for embedding external figures
+% (such as PDF, PNG, or JPG files) into the presentation slides.
 \RequirePackage{graphicx}
 
 % List customization: provides \setlist and \newlist for fine-grained
-% control over itemize/enumerate spacing and appearance
-\RequirePackage{enumitem}
+% control over itemize/enumerate spacing and appearance.
+% Note: Currently commented out to prevent conflicts with Beamer's native lists.
+%\RequirePackage{enumitem}
 
-% Multimedia embedding: provides \movie for embedding videos and audio
-% in PDF presentations. Works with Okular and Adobe Acrobat on Linux.
+% Multimedia embedding: provides the \movie command for embedding videos and audio
+% directly into PDF presentations. This works optimally with viewers like Okular and Adobe Acrobat on Linux environments.
 \RequirePackage{multimedia}
 
 
 % =============================================================================
 % SECTION 2: COLOR DEFINITIONS
 % =============================================================================
-% Custom colors used throughout the theme.
+% Custom colors used throughout the presentation theme.
 % =============================================================================
 
 % Define a slightly dimmed red for less eye strain.
-% Standard red in xcolor is (1.0, 0.0, 0.0) in the RGB model.
-% This reduces the red channel to 0.85 (15% dimmer) and adds a tiny bit
-% of green and blue to make it less harsh on the eyes in a dark room.
-% This is used for \point{} highlights and other emphasized text.
+% Standard red in the xcolor package is (1.0, 0.0, 0.0) in the RGB color model.
+% This custom definition reduces the red channel to 0.85 (making it 15% dimmer) and adds a tiny bit
+% of green (0.1) and blue (0.1) to make it less harsh on the eyes in a dark room.
+% This specific color is utilized by the \point{} command for highlights and other emphasized text.
 \definecolor{dimred}{rgb}{0.85, 0.1, 0.1}
 
 
 % =============================================================================
 % SECTION 3: BEAMER COLOR THEME
 % =============================================================================
-% Sets the color scheme for all Beamer elements: background, text, titles,
+% Sets the color scheme for all major Beamer elements: background, text, titles,
 % list items, and hyperlinks. Everything is designed for a dark background
-% with high-contrast white/dimmed text for readability in dark rooms.
+% with high-contrast white or dimmed text to maintain readability in dark rooms.
 % =============================================================================
 
-% Background: solid black for maximum contrast and minimal light emission
+% Background: set to solid black for maximum contrast and minimal light emission.
 \setbeamercolor{background canvas}{bg=black}
 
-% Text colors: white for body text, titles, and list items
+% Text colors: set to white for standard body text, frame titles, and list items.
 \setbeamercolor{normal text}{fg=white}
 \setbeamercolor{frametitle}{fg=white, bg=black}
 \setbeamercolor{title}{fg=white}
@@ -105,29 +112,28 @@
 \setbeamercolor{item}{fg=white}
 \setbeamercolor{subitem}{fg=white}
 
-% Hyperlinks: white for internal links (e.g., section references),
-% dimred for external URLs (to subtly distinguish them from internal links)
+% Hyperlinks: set to white for internal document links (e.g., section references),
+% and dimred for external URLs to subtly distinguish them from internal links without distracting the audience.
 \hypersetup{colorlinks=true, linkcolor=white, urlcolor=dimred}
 
 
 % =============================================================================
 % SECTION 4: BEAMER TEMPLATES
 % =============================================================================
-% Customizes the appearance of various Beamer elements: navigation symbols,
-% frame titles, and bullet styles. These are the visual building blocks
-% of every slide.
+% Customizes the visual appearance of various structural Beamer elements: navigation symbols,
+% frame titles, and bullet styles. These form the visual building blocks of every slide.
 % =============================================================================
 
-% Remove navigation symbols (the small icons at the bottom of each slide)
-% for a clean, distraction-free layout. In a live presentation, these are
-% rarely needed and only add visual clutter.
+% Remove navigation symbols (the small interactive icons usually found at the bottom of each slide)
+% to create a clean, distraction-free layout. In a live presentation, these are
+% rarely needed and generally only add visual clutter to the screen.
 \setbeamertemplate{navigation symbols}{}
 
 % Custom frame title template:
-%   - Adds a small vertical space above the title for breathing room
-%   - Displays the title in the current font and color
-%   - Draws a thin red horizontal line below the title for visual separation
-%   - The line acts as a subtle delimiter between the title and the content
+%   - Adds a small vertical space (0.2cm) above the title to provide breathing room.
+%   - Displays the title using the current font and color settings.
+%   - Draws a thin red horizontal rule (0.5pt thick) below the title for visual separation.
+%   - The red line acts as a subtle delimiter separating the title from the slide content.
 \setbeamertemplate{frametitle}{%
   \vspace{0.2cm}%
   \usebeamerfont{frametitle}%
@@ -138,110 +144,97 @@
   \vspace{0.05cm}%
 }
 
-% Use square bullets instead of the default circular ones.
-% Square bullets give a cleaner, more modern aesthetic and are
-% less visually prominent than circles, reducing distraction.
+% Override the default circular bullets by using square bullets for itemize lists.
+% Square bullets provide a cleaner, more modern aesthetic and are functionally
+% less visually prominent than circles, which helps reduce audience distraction.
 \setbeamertemplate{itemize items}[square]
 
 
 % =============================================================================
 % SECTION 5: GLOBAL ITEMIZE SPACING
 % =============================================================================
-% This section adds extra spacing between items in ALL itemize environments
-% for better readability. The \AddToHook command is the modern LaTeX way to
-% insert code after an environment ends.
+% This section introduces extra vertical spacing between items in ALL standard itemize environments
+% to improve overall readability. The \AddToHook command utilized here is the modern LaTeX method for
+% automatically inserting code after an environment ends.
 %
-% IMPORTANT: This applies to ALL \begin{itemize}...\end{itemize} blocks.
-% It does NOT apply to figcommentlist, which has its own tight spacing
-% defined in Section 6.
+% IMPORTANT NOTE: This spacing application applies to ALL \begin{itemize}...\end{itemize} blocks.
+% It intentionally does NOT apply to the custom figcommentlist environment, which maintains its own tight spacing
+% defined explicitly in Section 6.
 % =============================================================================
 
-% After every itemize environment, add 0.5cm of vertical space between items.
-% This makes multi-item lists more readable by providing clear visual
-% separation between bullet points.
+% After every itemize environment initializes, add 0.5cm of vertical space between the items.
+% This makes multi-item lists significantly more readable by providing clear visual
+% separation between distinct bullet points.
 %
-% Note: This is the "relaxed" spacing for regular slides. The figcommentlist
-%       used in \plotslidecomment has tighter spacing (see Section 6).
+% Note: This represents the "relaxed" spacing style for regular text slides. The figcommentlist
+%       environment used within \plotslidecomment utilizes much tighter spacing (see Section 6).
 \AddToHook{cmd/itemize/after}{%
   \addtolength{\itemsep}{0.5cm}%
 }
 
-
-% =============================================================================
+% ===========================================
 % SECTION 6: CUSTOM LIST FOR FIGURE COMMENTS
-% =============================================================================
-% We define a custom list environment called "figcommentlist" specifically
-% for the comment bullets in \plotslidecomment. This keeps the spacing tight
-% and separate from the global itemize settings used elsewhere.
-%
-% The \ifdefined guard prevents "already defined" errors if the style file
-% is loaded multiple times (e.g., in complex document builds).
-% =============================================================================
-
+% ===========================================
+% Defines a custom environment specifically designed for annotating figures compactly.
+% The \ifdefined check prevents LaTeX errors if the style file happens to be loaded multiple times.
 \ifdefined\figcommentlist\else
-  % Create a new list type called "figcommentlist" based on itemize,
-  % with a nesting depth of 1 (we don't need nested lists for comments).
-  \newlist{figcommentlist}{itemize}{1}
-
-  % Configure the spacing and label for figcommentlist:
-  %   - noitemsep: removes all default vertical spacing between items
-  %   - topsep=2pt: minimal space above the list (keeps it close to the figure)
-  %   - parsep=2pt: minimal space between paragraphs within a single item
-  %   - partopsep=0pt: no extra space when the list starts a new paragraph
-  %   - itemsep=2pt: small but visible space between bullet points
-  %   - leftmargin=*: uses the default left margin (aligned with the figure)
-  %   - label=\textbullet: uses a standard bullet point (•) as the label
-  %
-  \setlist[figcommentlist]{
-    noitemsep,
-    topsep=2pt,
-    parsep=2pt,
-    partopsep=0pt,
-    itemsep=2pt,
-    leftmargin=*,
-    label=\textbullet
+  \newenvironment{figcommentlist}{%
+    \begin{itemize}%
+      % These lengths override the global relaxed spacing to create a dense, compact list.
+      \setlength{\itemsep}{2pt}%
+      \setlength{\parsep}{2pt}%
+      \setlength{\topsep}{2pt}%
+      \setlength{\partopsep}{0pt}%
+      \setlength{\leftmargin}{1.5em}%
+    }{%
+    \end{itemize}%
   }
 \fi
-
 
 % =============================================================================
 % SECTION 7: CUSTOM COMMANDS FOR PRESENTATION CONTENT
 % =============================================================================
-% These commands provide semantic markup for presentation content,
-% making the source code more readable and the slides more consistent.
+% These custom commands provide semantic markup options for presentation content,
+% which makes the underlying source code more readable and ensures slide styling remains consistent.
 % =============================================================================
 
 % \idea{text}
-%   Purpose: Wraps regular content without any formatting.
-%   Used alongside \point{} to separate the main idea from the key takeaway.
-%   This creates a clean semantic distinction in the source code:
+%   Purpose: Wraps regular slide content without applying any additional formatting.
+%   It is designed to be used alongside the \point{} command to cleanly separate the main idea from the key takeaway.
+%   This creates a clean, logical semantic distinction directly in the source code:
 %     \idea{This is the main idea.} \point{This is the punchline.}
 %
-%   The lack of formatting is intentional: it keeps the focus on the content
-%   and lets the \point{} stand out.
+%   The deliberate lack of formatting is intentional: it keeps the audience focus squarely on the content
+%   and allows the accompanying \point{} text to stand out effectively.
+%
+%   Example:
+%   \idea{The simulation reached a steady state.} \point{Energy is conserved.}
 \newcommand{\idea}[1]{#1}
 
 % \point{text}
-%   Purpose: Highlights the key insight or punchline in dimred italic.
-%   Used to emphasize the single most important takeaway from each slide.
-%   The combination of dimred color and italic font draws the eye without
-%   being jarring or distracting.
+%   Purpose: Highlights the key insight or textual punchline by styling it in dimred italic.
+%   Used specifically to emphasize the single most important takeaway from any given slide.
+%   The unique combination of the dimred color and italicized font draws the eye naturally without
+%   being visually jarring or distracting to the viewer.
 %
-%   Usage: Always pair with \idea{} for a clear "idea → punchline" structure.
+%   Usage Rule: It should always be paired with the \idea{} command to maintain a clear "idea → punchline" structure.
 \newcommand{\point}[1]{%
   \textcolor{dimred}{\textit{#1}}%
 }
 
 % \plain{text}
-%   Purpose: Creates a minimal slide with only centered text.
-%   Removes all headers, footers, and navigation.
+%   Purpose: Generates a minimal, distraction-free slide displaying only centered text.
+%   It automatically removes all standard headers, footers, and navigation elements.
 %
-%   Use cases:
-%     - Section breaks ("Part I: Introduction")
-%     - Emphasis quotes ("The Moon changes everything")
-%     - Transitional statements ("Let's now consider the implications")
+%   Ideal Use Cases:
+%     - Section breaks (e.g., "Part I: Introduction")
+%     - Emphasis quotes (e.g., "The Moon changes everything")
+%     - Transitional statements (e.g., "Let's now consider the implications")
 %
-%   The text is displayed in Large bold for maximum impact without clutter.
+%   The provided text is rendered in Large bold font to maximize impact without introducing visual clutter.
+%
+%   Example:
+%   \plain{Part II: Gravitational Wave Detection}
 \newcommand{\plain}[1]{%
   \begin{frame}[plain]
     \centering
@@ -256,18 +249,18 @@
 % SECTION 8: PLOT SLIDES (NO COMMENTS)
 % =============================================================================
 % \plotslide[options]{filename}
-%   Purpose: Displays a single plot at full size with a gentle fade-in.
-%   The plot is centered vertically and horizontally.
+%   Purpose: Renders a single plot at full slide size accompanied by a gentle fade-in transition.
+%   The provided plot is perfectly centered both vertically and horizontally on the slide.
 %
-%   The 1.5-second fade mitigates the abrupt brightness jump from a black
-%   slide to a bright plot, giving the audience's eyes time to adapt.
+%   The built-in 1.5-second fade transition specifically mitigates the abrupt brightness jump that occurs when switching from a black
+%   slide to a bright plot, allowing the audience's eyes time to comfortably adapt.
 %
-%   Options: any standard beamer frame options (e.g., <+-> for overlays)
-%   Filename: path to an image file (PDF, PNG, JPG, etc.)
+%   Options: Accepts any standard beamer frame options (e.g., <+-> for staggered overlays).
+%   Filename: The relative or absolute path to an image file (supports PDF, PNG, JPG, etc.).
 %
-%   Usage:
+%   Usage Examples:
 %     \plotslide{figures/violin_plots.pdf}
-%     \plotslide[<+->]{figures/animation.pdf}  % with overlay
+%     \plotslide[<+->]{figures/animation.pdf}  % Incorporates an overlay specification
 % =============================================================================
 \newcommand{\plotslide}[2][]{%
   \begin{frame}[plain,#1]
@@ -284,27 +277,27 @@
 % SECTION 9: PLOT SLIDES WITH COMMENTS
 % =============================================================================
 % \plotslidecomment[options]{filename}{comment1}{comment2}{comment3}{comment4}
-%   Purpose: Displays a plot at the top of the slide with compact bullet
-%            comments below. The figure moves to the top to maximize
-%            visibility while still providing context.
+%   Purpose: Displays a plot at the upper section of the slide accompanied by compact bullet
+%            comments situated directly below it. The figure is intentionally moved to the top of the frame to maximize
+%            overall visibility while still leaving room to provide necessary context.
 %
-%   The comments use the custom figcommentlist (Section 6) with tight spacing,
-%   so they don't waste vertical space.
+%   The included comments utilize the custom figcommentlist environment (detailed in Section 6) which features tight spacing,
+%   ensuring that the text does not waste valuable vertical slide space.
 %
-%   Empty arguments are automatically ignored, so you can use 1, 2, 3, or 4
-%   comments without worrying about blank bullet points.
+%   Empty text arguments are automatically detected and ignored, allowing you to seamlessly provide 1, 2, 3, or up to 4
+%   comments without inadvertently rendering blank bullet points.
 %
-%   Options: any standard beamer frame options (e.g., <+-> for overlays)
-%   Filename: path to an image file (PDF, PNG, JPG, etc.)
-%   comment1-4: up to four bullet points of annotation
+%   Options: Accepts any standard beamer frame options (e.g., <+-> for overlays).
+%   Filename: The relative or absolute path to an image file (supports PDF, PNG, JPG, etc.).
+%   comment1-4: Allows for up to four distinct bullet points of text annotation.
 %
-%   Usage:
-%     \plotslidecomment{figures/plot.pdf}{First comment}
-%     \plotslidecomment{figures/plot.pdf}{First}{Second}
-%     \plotslidecomment{figures/plot.pdf}{First}{Second}{Third}
-%     \plotslidecomment{figures/plot.pdf}{First}{Second}{Third}{Fourth}
+%   Usage Examples:
+%     \plotslidecomment{figures/plot.pdf}{First observation comment}{}{}{}
+%     \plotslidecomment{figures/plot.pdf}{First observation}{Second observation}{}{}
+%     \plotslidecomment{figures/plot.pdf}{First observation}{Second observation}{Third observation}{}
+%     \plotslidecomment{figures/plot.pdf}{First observation}{Second observation}{Third observation}{Fourth observation}
 %
-%   Technical note: The command takes up to 6 arguments:
+%   Technical implementation note: The underlying LaTeX command takes exactly 6 arguments:
 %     #1 = optional frame options
 %     #2 = filename
 %     #3 = first comment
@@ -338,23 +331,23 @@
 % SECTION 10: MOVIE SLIDE
 % =============================================================================
 % \slidemovie[options]{filename}{poster}{caption}
-%   Purpose: Embeds a video in a slide with a preview image (poster).
-%   Clicking the poster plays the video. The caption appears below.
+%   Purpose: Embeds a playable video directly within a slide and displays a preview image (known as a poster).
+%   Clicking the static poster image during the presentation initiates video playback. The provided caption string appears centered below the media.
 %
-%   Requires: \RequirePackage{multimedia} (loaded in Section 1)
-%   On Linux, use Okular or Adobe Acrobat for best results.
+%   Package Requirement: This feature relies on \RequirePackage{multimedia} (which is loaded in Section 1).
+%   Compatibility Note: On Linux operating systems, use viewers like Okular or Adobe Acrobat to ensure best playback results.
 %
-%   Options: any options accepted by \movie (width, height, poster, etc.)
-%   filename: the video file (e.g., movie.mp4)
-%   poster:   a static image shown before playback (e.g., first_frame.png)
-%   caption:  text displayed below the movie
+%   Options: Accepts any configuration options recognized by the \movie command (such as width, height, poster, etc.).
+%   filename: The target video file (e.g., simulation_movie.mp4).
+%   poster:   A static image file displayed on the slide before playback is initiated (e.g., first_frame.png).
+%   caption:  The descriptive text displayed immediately below the movie frame.
 %
-%   Extract a poster frame from a video using ffmpeg:
+%   Pro-tip: You can extract a suitable poster frame directly from your video file using ffmpeg:
 %     ffmpeg -i movie.mp4 -vframes 1 poster.png
 %
-%   Usage:
+%   Usage Examples:
 %     \slidemovie{animation.mp4}{poster.png}{Precession of the rotation axis.}
-%     \slidemovie[width=0.95\textwidth,height=0.8\textheight]{movie.mp4}{poster.png}{Caption text}
+%     \slidemovie[width=0.95\textwidth,height=0.8\textheight]{movie.mp4}{poster.png}{Caption text describing the footage}
 % =============================================================================
 \newcommand{\slidemovie}[4][]{%
   \begin{frame}[plain]
@@ -374,12 +367,19 @@
 % =============================================================================
 % SECTION 11: CUSTOM TITLE PAGE
 % =============================================================================
-% Redefines \maketitle to create a clean, centered title slide with
-% no navigation clutter. The title is displayed in LARGE bold font
-% and the author appears below with a small vertical gap.
+% Redefines the standard \maketitle command to generate a clean, perfectly centered title slide devoid of
+% any navigation clutter. The presentation title is output in a LARGE bold font size,
+% and the author's name appears directly below it separated by a small vertical gap.
 %
-% The title and author are set using the standard \title{} and \author{}
-% commands. The date is omitted for a cleaner look (use \date{} if needed).
+% The textual contents for the title and author are populated using the standard Beamer \title{} and \author{}
+% preamble commands. The presentation date is intentionally omitted by default to ensure a cleaner aesthetic (though you can explicitly use \date{} if it is strictly needed).
+%
+% Usage Example:
+%   In your main document preamble:
+%   \title{Extreme-Mass-Ratio Inspirals}
+%   \author{Dr. Pau Amaro Seoane}
+%   Inside your document environment:
+%   \maketitle
 % =============================================================================
 
 \makeatletter
@@ -399,19 +399,19 @@
 % =============================================================================
 % END OF STYLE FILE
 % =============================================================================
-% To use this theme in your presentation, add:
+% To deploy this customized theme in your presentation, simply add the following line:
 %   \usepackage{beamerthemehaidian}
-% to the preamble of your .tex file.
+% to the preamble section of your main .tex file.
 %
-% Example:
+% Complete Minimal Working Example:
 %   \documentclass{beamer}
 %   \usepackage{beamerthemehaidian}
-%   \title{My Presentation}
+%   \title{My Presentation Title}
 %   \author{Your Name}
 %   \begin{document}
 %   \maketitle
 %   \plotslide{figures/plot.pdf}
-%   \slidemovie{animation.mp4}{poster.png}{Caption}
+%   \slidemovie{animation.mp4}{poster.png}{Detailed caption for the embedded media}
 %   \end{document}
 % =============================================================================
 \endinput
